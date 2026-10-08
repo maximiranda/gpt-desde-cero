@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gptdc"
+version = "0.1.0"
+description = "GPT desde cero: un GPT pieza por pieza, en Python, con la misma arquitectura que GPT-3 pero en miniatura."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.9"
+dependencies = []
+
+[project.urls]
+Repositorio = "https://github.com/maximiranda/gpt-desde-cero"
+
+[tool.setuptools]
+packages = ["gptdc"]

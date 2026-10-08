@@ -18,7 +18,13 @@ paquete `gptdc`, que al final de la serie es el GPT completo.
 
 **En Colab** (sin instalar nada): el botón "Abrir en Colab" de cada video, y *Entorno de ejecución → Ejecutar todas*.
 
-**En tu computadora** (Python 3.9 o más nuevo):
+**Solo el paquete**, en Colab o en tu computadora:
+
+```bash
+pip install git+https://github.com/maximiranda/gpt-desde-cero
+```
+
+**En tu computadora**, con los notebooks (Python 3.9 o más nuevo):
 
 ```bash
 git clone https://github.com/maximiranda/gpt-desde-cero.git

@@ -51,6 +51,7 @@ class Tokenizador:
         self.fusiones = [tuple(par) for par in fusiones]
         self.vocab = sorted(letras) + [a + b for a, b in self.fusiones]
         self.numero = {pieza: i for i, pieza in enumerate(self.vocab)}
+        self._cortados = {}   # memoria: cada trozo distinto se corta una sola vez
 
     @classmethod
     def entrenar(cls, texto, fusiones=500):
@@ -66,13 +67,17 @@ class Tokenizador:
         return cls(set(texto), aprendidas)
 
     def piezas(self, texto):
-        """Corta `texto` en tokens: trozos, letras y las fusiones aplicadas en orden."""
+        """Corta `texto` en tokens: trozos, letras y las fusiones aplicadas en orden.
+        Un libro repite mucho los mismos trozos (" de", " la", " Sancho"): cada trozo distinto se corta una
+        sola vez y se guarda, así codificar el Quijote entero tarda segundos y no minutos."""
         piezas = []
         for t in re.findall(PATRON, texto):
-            p = list(t)
-            for par in self.fusiones:
-                p = fusionar(p, par, par[0] + par[1])
-            piezas += p
+            if t not in self._cortados:
+                p = list(t)
+                for par in self.fusiones:
+                    p = fusionar(p, par, par[0] + par[1])
+                self._cortados[t] = p
+            piezas += self._cortados[t]
         return piezas
 
     def codificar(self, texto):
